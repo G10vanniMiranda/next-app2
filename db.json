@@ -1,0 +1,16 @@
+{
+  "produtos": [
+    {
+      "id": 1,
+      "nome": "notebook",
+      "descricao": "Processador core i3, memória ddr4",
+      "preco": "2000"
+    },
+    {
+      "id": 2,
+      "nome": "teclado gamer",
+      "descricao": "teclado com led ",
+      "preco": "500"
+    }
+  ]
+}
