@@ -1,16 +1,22 @@
 {
   "produtos": [
     {
-      "id": 1,
+      "id": "1",
       "nome": "notebook",
       "descricao": "Processador core i3, memória ddr4",
       "preco": "2000"
     },
     {
-      "id": 2,
+      "id": "2",
       "nome": "teclado gamer",
       "descricao": "teclado com led ",
       "preco": "500"
+    },
+    {
+      "id": "361f",
+      "nome": "Impressora Epson",
+      "descricao": "EcoTank L3250 - Multifuncional, Tanque de Tinta Colorida, Wi-Fi Direct, USB, Bivolt,",
+      "preco": "999"
     }
   ]
 }
