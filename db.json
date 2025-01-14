@@ -7,16 +7,17 @@
       "preco": "2000"
     },
     {
-      "id": "2",
-      "nome": "teclado gamer",
-      "descricao": "teclado com led ",
-      "preco": "500"
+      "nome": "Impressora Epson",
+      "descricao": "EcoTank L3250 - Multifuncional, Tanque de Tinta Colorida, Alterado",
+      "preco": "999",
+      "id": "361f"
     },
     {
-      "id": "361f",
-      "nome": "Impressora Epson",
-      "descricao": "EcoTank L3250 - Multifuncional, Tanque de Tinta Colorida, Wi-Fi Direct, USB, Bivolt,",
-      "preco": "999"
+      "nome": "Cadeira Gamer 2",
+      "descricao": "Cadeira profissional com led 10x cartão alterado",
+      "preco": 1999,
+      "id": "7b2e"
     }
-  ]
+  ],
+  "clientes": []
 }

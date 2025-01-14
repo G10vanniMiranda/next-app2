@@ -8,35 +8,35 @@ import { IconEdit, IconPlus, IconTrash } from "@tabler/icons-react";
 
 export default function Produto() {
 
-    const [id, setId] = useState(""); // não sei
+    const [id, setId] = useState(" ");       // não sei
     const [nome, setNome] = useState("");
     const [descricao, setDescricao] = useState("");
-    const [preco, setPreco] = useState("");
+    const [preco, setPreco] = useState(0);
 
     const [search, setSearch] = useState("");
-
-    const [data, setData] = useState([]);
+    const [editarShow, setEditarShow] = useState("hidden");
+    const [data, setData] = useState([]); // array
 
     const url = "http://localhost:3001/produtos";
 
-    // Listar
+    // 1 :: Listar
     useEffect(() => {
         axios.get(url)
             .then(res => setData(res.data))
     }, [ data, setData] )
 
-    // Inserir produto
+    // 2 :: Inserir produto
     // const Inserir = () => {
     const Inserir = () => {
         // function Inserir
         axios.post(url, { nome, descricao, preco })
     }
 
-    // Validar
+    // 3 :: Validar
     const Validar = (event: FormEvent) => {
         event.preventDefault();
 
-        if (nome === "" || descricao === "" || preco === "") {
+        if (nome === "" || descricao === "" || preco === 0 ) {
             alert("Preencha todos os campos");
             return false;
         }
@@ -44,11 +44,51 @@ export default function Produto() {
         Inserir();
     }
 
-    // Pesquisar
+    // 4 :: Excluir
+    const Excluir = (id: string, nome: string) => {
+        const confirmar = window.confirm("Deseja realmente excluir? " + nome);
+
+        if (!confirmar) {
+            return;
+        }
+
+        axios.delete(`${url}/${id}`)
+    }
+
+    // 5 :: Carrega
+    const Carregar = (id: string, nome: string, descricao: string, preco: number) => {
+        setId(id);
+        setNome(nome);
+        setDescricao(descricao);
+        setPreco(preco);
+
+        setEditarShow("");
+    }
+
+    // 6 :: Editar
+    const Editar = async (event: FormEvent) => {
+        event.preventDefault();
+
+        axios.put(`${url}/${id}`, { nome, descricao, preco } )
+
+        .then( () => {
+            alert("Editado com sucesso");
+
+            setId("");
+            setNome("");
+            setDescricao("");
+            setPreco(0);
+
+            setEditarShow("hidden");
+        })
+    }
+
+    // 7 :: Pesquisar
     const buscar = data.filter((item: IProduto) =>
         item.nome.toLowerCase().includes(search.toLowerCase())
     );
 
+    // 8 :: Aprensetar na web
     return (
         <div className="flex justify-center flex-col items-center mt-10">
             <div className="container mt-3 hidden md:block">
@@ -57,7 +97,7 @@ export default function Produto() {
                     <input type="text" placeholder="Pesquisar"
                         className="p-3 rounded-md text-black bg-zinc-200"
                         value={search} onChange={e => setSearch(e.target.value)}
-                    />
+                />
                 </div>
 
                 <form className="flex gap-5">
@@ -74,13 +114,18 @@ export default function Produto() {
 
                     <input type="number" placeholder="Digite o preço"
                         className="p-3 rounded-md text-black bg-zinc-200"
-                        value={preco} onChange={e => setPreco(e.target.value)}
+                        value={preco} onChange={e => setPreco(+e.target.value)}
                     />
 
                     <button
                         className="bg-green-600 w-[50px] rounded-md text-white flex justify-center items-center"
                         onClick={Validar}>
                             <IconPlus />
+                    </button>
+
+                    <button
+                        className={`bg-yellow-500 w-[50px] rounded-md text-white flex justify-center items-center ${ editarShow  } `}
+                        onClick={Editar}> <IconEdit />
                     </button>
                 </form>
             </div>
@@ -101,14 +146,19 @@ export default function Produto() {
                             <tr key={item.id} className="">
                                 <td className="">{item.id}</td>
                                 <td className="">{item.nome}</td>
-                                <td className="hidden md:block">{item.descricao}</td>
+                                {/* resolver */}
+                                <td className=" " >{item.descricao}</td>
                                 <td >{item.preco}</td>
                                 <td className="w-40">
-                                    <button className="bg-yellow-500 p-2 m-2 rounded-md text-white">
+                                    <button className="bg-yellow-500 p-2 rounded-md text-white"
+                                        onClick={() => Carregar( item.id, item.nome, item.descricao, item.preco)}
+                                    >
                                         <IconEdit />
                                     </button>
 
-                                    <button className="bg-red-600 p-2 rounded-md text-white ml-2">
+                                    <button className="bg-red-600 p-2 rounded-md text-white ml-2"
+                                        onClick={ () => Excluir(item.id, item.nome)}
+                                    >
                                         <IconTrash />
                                     </button>
                                 </td>
