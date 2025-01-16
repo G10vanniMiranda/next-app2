@@ -1,22 +1,32 @@
 {
   "produtos": [
     {
-      "id": "1",
-      "nome": "notebook",
-      "descricao": "Processador core i3, memória ddr4",
-      "preco": "2000"
+      "nome": "notebook dell",
+      "descricao": "Processador core i3, memória ddr4 editado",
+      "quantidade": 50,
+      "preco": 2500,
+      "id": "1"
     },
     {
       "nome": "Impressora Epson",
       "descricao": "EcoTank L3250 - Multifuncional, Tanque de Tinta Colorida, Alterado",
+      "quantidade": 8,
       "preco": "999",
       "id": "361f"
     },
     {
       "nome": "Cadeira Gamer 2",
       "descricao": "Cadeira profissional com led 10x cartão alterado",
+      "quantidade": 20,
       "preco": 1999,
       "id": "7b2e"
+    },
+    {
+      "id": "89bc",
+      "nome": "notebook acer",
+      "descricao": "Core i5, memória ddr4",
+      "preco": 2800,
+      "quantidade": 10
     }
   ],
   "clientes": []

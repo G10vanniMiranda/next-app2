@@ -10,14 +10,15 @@ export default function Produto() {
 
     const [id, setId] = useState(" ");       // não sei
     const [nome, setNome] = useState("");
-    const [descricao, setDescricao] = useState("");
     const [preco, setPreco] = useState(0);
+    const [quantidade, setQuantidade] = useState(0);
+    const [descricao, setDescricao] = useState("");
 
+    const [data, setData] = useState([]); // array
     const [search, setSearch] = useState("");
     const [editarShow, setEditarShow] = useState("hidden");
-    const [data, setData] = useState([]); // array
 
-    const url = "http://localhost:3001/produtos";
+    const url = "http://localhost:8080/produtos";
 
     // 1 :: Listar
     useEffect(() => {
@@ -29,14 +30,14 @@ export default function Produto() {
     // const Inserir = () => {
     const Inserir = () => {
         // function Inserir
-        axios.post(url, { nome, descricao, preco })
+        axios.post(url, { nome, descricao, preco, quantidade })
     }
 
     // 3 :: Validar
     const Validar = (event: FormEvent) => {
         event.preventDefault();
 
-        if (nome === "" || descricao === "" || preco === 0 ) {
+        if (nome === "" || descricao === "" || quantidade === 0  || preco === 0 ) {
             alert("Preencha todos os campos");
             return false;
         }
@@ -56,10 +57,11 @@ export default function Produto() {
     }
 
     // 5 :: Carrega
-    const Carregar = (id: string, nome: string, descricao: string, preco: number) => {
+    const Carregar = (id: string, nome: string, descricao: string, quantidade: number, preco: number) => {
         setId(id);
         setNome(nome);
         setDescricao(descricao);
+        setQuantidade(quantidade);
         setPreco(preco);
 
         setEditarShow("");
@@ -69,7 +71,7 @@ export default function Produto() {
     const Editar = async (event: FormEvent) => {
         event.preventDefault();
 
-        axios.put(`${url}/${id}`, { nome, descricao, preco } )
+        axios.put(`${url}/${id}`, { nome, descricao, quantidade, preco } )
 
         .then( () => {
             alert("Editado com sucesso");
@@ -77,6 +79,7 @@ export default function Produto() {
             setId("");
             setNome("");
             setDescricao("");
+            setQuantidade(0);
             setPreco(0);
 
             setEditarShow("hidden");
@@ -103,7 +106,7 @@ export default function Produto() {
                 <form className="flex gap-5">
 
                     <input type="text" placeholder="Digite o nome do produto"
-                        className="p-3 rounded-md text-black bg-zinc-200"
+                        className="p-3 rounded-md text-black bg-zinc-200 flex-1"
                         value={nome} onChange={e => setNome(e.target.value)}
                     />
 
@@ -112,8 +115,13 @@ export default function Produto() {
                         value={descricao} onChange={e => setDescricao(e.target.value)}
                     />
 
+                    <input type="text" placeholder="Digite a Qtd "
+                        className="p-3 rounded-md text-black bg-zinc-200 w-32 text-center"
+                        value={quantidade} onChange={e => setQuantidade(parseInt(e.target.value))}
+                    />
+
                     <input type="number" placeholder="Digite o preço"
-                        className="p-3 rounded-md text-black bg-zinc-200"
+                        className="p-3 rounded-md text-black bg-zinc-200  w-32 text-right"
                         value={preco} onChange={e => setPreco(+e.target.value)}
                     />
 
@@ -134,24 +142,26 @@ export default function Produto() {
                 <table className="table w-100">
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th className="hidden">ID</th>
                             <th>Nome</th>
-                            <th className="hidden md:block">Descrição</th>
+                            <th className=" ">Descrição</th>
+                            <th className=" ">Qtd</th>
                             <th>Preço</th>
-                            <th>Ações</th>
+                            <th className="">Ações</th>
                         </tr>
                     </thead>
                     <tbody className="text-black w-100">
                         {buscar.map((item: IProduto) => (
                             <tr key={item.id} className="">
-                                <td className="">{item.id}</td>
+                                <td className="hidden">{item.id}</td>
                                 <td className="">{item.nome}</td>
                                 {/* resolver */}
-                                <td className=" " >{item.descricao}</td>
+                                <td className=" ">{item.descricao}</td>
+                                <td className=" ">{item.quantidade}</td>
                                 <td >{item.preco}</td>
                                 <td className="w-40">
                                     <button className="bg-yellow-500 p-2 rounded-md text-white"
-                                        onClick={() => Carregar( item.id, item.nome, item.descricao, item.preco)}
+                                        onClick={() => Carregar( item.id, item.nome, item.descricao, item.quantidade, item.preco)}
                                     >
                                         <IconEdit />
                                     </button>
