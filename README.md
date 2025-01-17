@@ -5,7 +5,7 @@ npm install bootstrap@5.2.3
 
 * Rodar o backend
 ```
-npx json-server db.json --port 8080
+npx json-server db.json --port 8090
 ```
 
 * EndPoint

@@ -1,5 +1,5 @@
 {
-  "produtos": [
+  "produto": [
     {
       "nome": "notebook dell",
       "descricao": "Processador core i3, memória ddr4 editado",
@@ -29,5 +29,5 @@
       "quantidade": 10
     }
   ],
-  "clientes": []
+  "categoria": []
 }
