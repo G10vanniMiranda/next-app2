@@ -4,6 +4,7 @@ import axios from "axios";
 import { IProduto } from "@/model/Produto";
 import { FormEvent, useEffect, useState } from "react";
 import { IconEdit, IconPlus, IconTrash } from "@tabler/icons-react";
+import Head from "next/head";
 // CRUD CREATE, READ, UPDATE, DELETE
 
 export default function Produto() {
@@ -94,6 +95,9 @@ export default function Produto() {
     // 8 :: Aprensetar na web
     return (
         <div className="flex justify-center flex-col items-center mt-10">
+             <Head>
+                <title>My page title</title>
+            </Head>
             <div className="container mt-3 hidden md:block">
 
                 <div className="row py-3 px-3">

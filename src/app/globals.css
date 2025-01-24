@@ -19,3 +19,7 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.Nav-Item{
+  @apply flex flex-col items-center justify-center bg-gray-700 text-white p-3 rounded-lg hover:bg-gray-600 hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300
+}

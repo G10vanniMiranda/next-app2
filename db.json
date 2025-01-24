@@ -27,6 +27,13 @@
       "descricao": "Core i5, memória ddr4",
       "preco": 2800,
       "quantidade": 10
+    },
+    {
+      "id": "8e17",
+      "nome": "PS5 ",
+      "descricao": "SSD 2GB",
+      "quantidade": "10",
+      "preco": "5000"
     }
   ],
   "categoria": []
